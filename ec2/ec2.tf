@@ -74,13 +74,16 @@ resource "aws_instance" "web_server" {
   vpc_security_group_ids = [aws_security_group.ec2_sg.id]
   user_data              = file("scripts/userdata.sh")
   iam_instance_profile   = aws_iam_instance_profile.instance_profile.name
-  tags                   = merge(var.tags, { Name = join("", [var.name, "-", "webserver"]) }, { Environment = var.name })
-
-  # best practices as per checkov scanner
-  # monitoring    = true
-  # ebs_optimized = true
-  # root_block_device {
-  #   encrypted = true
-  # }
+  tags                   = merge(var.tags, { Name = join("", [var.name, "-", "webserver"]) },
+           { Environment = var.name 
+ 
+ 
+ # best practices as per checkov scanner
+ 
+  monitoring    = true
+  ebs_optimized = true
+   root_block_device {
+      encrypted = true
+   }
 
 }
